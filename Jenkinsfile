@@ -2,7 +2,7 @@ pipeline {
 	agent any
 
 	environment {
-		DOCKER_IMAGE='steelyhands/cw2'
+		DOCKER_IMAGE_NAME='steelyhands/cw2'
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
 	}
 
@@ -19,7 +19,7 @@ pipeline {
 			steps {
 				echo 'Start of Testing'
 				script {
-					docker.image(env.DOCKER_IMAGE).inside {
+					docker.image(env.DOCKER_IMAGE_NAME).inside {
 						echo 'Container built successfully'
 					}
 				}
@@ -36,7 +36,7 @@ pipeline {
 		stage('Deploy to Kubernetes') {
 			steps {
 				sshagent(['my-ssh-key']) {
-					sh "ssh -t -t ubuntu@ip-172-31-86-106 -o StrictHostKeyChecking=no \'kubectl set image deployment/cw2 --image=/steelyhands/cw2:latest'"
+					sh "ssh -t -t ubuntu@ip-172-31-63-200 -o StrictHostKeyChecking=no \'kubectl set image deployment/cw2 --image=steelyhands/cw2:latest'"
 				}
 			}
 		}
