@@ -36,7 +36,7 @@ pipeline {
 		stage('Deploy to Kubernetes') {
 			steps {
 				sshagent(['my-ssh-key']) {
-					sh "ssh -t -t ubuntu@ip-172-31-63-200 -o StrictHostKeyChecking=no \'kubectl set image deployment/cw2 --image=steelyhands/cw2:latest'"
+					sh "ssh -t -t ubuntu@ip-172-31-63-200 -o StrictHostKeyChecking=no \'kubectl set image deployment/cw2 cw2=steelyhands/cw2:latest'"
 				}
 			}
 		}
