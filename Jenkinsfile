@@ -30,7 +30,7 @@ pipeline {
 			steps {
 				echo 'pushing to dockerhub'
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-				sh 'docker push steelyhands/cw2:latest'
+				sh 'docker push steelyhands/cw2:1.0'
 			}
 		}
 
